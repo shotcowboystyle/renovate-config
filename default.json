@@ -1,0 +1,42 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base",
+    ":maintainLockFilesWeekly",
+    ":automergeMinor",
+    ":automergePr",
+    ":automergeDigest",
+    ":labels(dependencies)",
+    ":rebaseStalePrs",
+    ":enableVulnerabilityAlerts",
+    ":disableDependencyDashboard",
+    ":semanticCommits",
+    ":semanticCommitTypeAll(chore)",
+    ":timezone(Asia/Seoul)",
+    "helpers:pinGitHubActionDigests",
+    "group:allNonMajor"
+  ],
+  "schedule": ["before 12pm on Sunday"],
+  "assignees": ["Sayakie"],
+  "prCreation": "immediate",
+  "npm": {
+    "rangeStrategy": "bump",
+    "platformAutomerge": true,
+    "platformCommit": true,
+    "packageRules": [
+      {
+        "description": "Disable 'engines' to match",
+        "matchDepTypes": ["engines", "devEngines"],
+        "enabled": false
+      },
+      {
+        "matchPackagePatterns": ["@dareharu"],
+        "groupName": "Dareharu Dependencies"
+      },
+      {
+        "matchPackagePatterns": ["@sapphire"],
+        "groupName": "Sapphire Dependencies"
+      }
+    ]
+  }
+}
